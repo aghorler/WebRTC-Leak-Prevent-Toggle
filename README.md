@@ -6,3 +6,5 @@ The only required permission is 'privacy'.
 #####Download
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/webrtc-leak-prevent-toggl/kignegkkmknfpincglcjggfbgghpamim)
+
+[Opera Addons](https://addons.opera.com/en/extensions/details/webrtc-leak-prevent-toggle/)
