@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>WebRTC Leak Prevent Toggle</title>
+</head>
+
+<body>
+	<h3>Toggle options</h3>
+	<p style="color:black">Change how the toggle button prevents WebRTC leaks.</p>
+	<p style="color:red">Most users will not need to change anything here.</p>
+	<p>
+		<label style="color:grey">
+			<input type="checkbox" disabled="disabled" checked="checked"> Toggle WebRTC's use of routes other than the default route.
+			<br>
+			<i>This cannot be altered.</i>
+		</label>
+	</p>
+	<p>
+		<label>
+			<input type="checkbox" id="proxy"> Toggle WebRTC's use of non-proxied UDP.
+			<br>
+			<i>(Only supported from Chrome version 47)</i>
+		</label>
+	</p>
+	<p>
+		<strong>WebRTC IP handling policy (v48+)</strong> 
+		<br>
+		
+	</p>
+	<p>
+		Toggle WebRTC's:
+		<select id="policy">
+			<option value="default_public_interface_only">Use of only the default public interface</option>
+			<option value="disable_non_proxied_udp">Use of non-proxied UDP</option>
+		</select>
+		<br>
+		<i>(Only supported from Chrome version 48)</i>
+		
+	</p>
+	<div id="status"></div>
+	<button id="save">Apply settings</button>
+	<script src="/js/options.js"></script>
+	<p align="center" style="color:grey">Developed by rentamob | <a href="https://www.reddit.com/user/rentamob/">/u/rentamob</a> on reddit | <a href="https://github.com/rentamob/WebRTC-Leak-Prevent-Toggle">GitHub source</a></p>
+</body>
+
+</html>
