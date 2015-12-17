@@ -11,10 +11,10 @@
 		"default_title": "WebRTC Toggle"
 	},
 	"options_ui": {
-        "page": "/html/options.html",
-        "chrome_style": true,
-        "open_in_tab": false
-    },
+		"page": "/html/options.html",
+		"chrome_style": true,
+		"open_in_tab": false
+	},
 	"permissions": ["privacy", "storage"],
 	"background": {
 		"scripts": ["/js/background.js"],

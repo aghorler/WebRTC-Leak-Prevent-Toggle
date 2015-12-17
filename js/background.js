@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 chrome.browserAction.onClicked.addListener(function(activeTab) {
-	try { //Uses webRTCMultipleRoutesEnabled to toggle.
+	try { //Uses webRTCMultipleRoutesEnabled for toggle status.
 		chrome.privacy.network.webRTCMultipleRoutesEnabled.get({}, function(setWebRTC) {
 			if (setWebRTC.value) { //On.
 				//webRTCMultipleRoutesEnabled set to false.
@@ -28,7 +28,7 @@ chrome.browserAction.onClicked.addListener(function(activeTab) {
 						scope: 'regular'
 					});
 					chrome.privacy.network.webRTCIPHandlingPolicy.set({
-					value: items.rtcIPHandling
+						value: items.rtcIPHandling
 					});
 				});
 				chrome.browserAction.setIcon({
@@ -39,8 +39,8 @@ chrome.browserAction.onClicked.addListener(function(activeTab) {
 				chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
 					'value': true,
 					scope: 'regular'
-				}); 
-				
+				});
+
 				//webRTCNonProxiedUdpEnabled set to user preference. WebRTCIPHandlingPolicy set to 'default'.
 				chrome.storage.local.get(null, function(items) {
 					chrome.privacy.network.webRTCNonProxiedUdpEnabled.set({
@@ -48,7 +48,7 @@ chrome.browserAction.onClicked.addListener(function(activeTab) {
 						scope: 'regular'
 					});
 					chrome.privacy.network.webRTCIPHandlingPolicy.set({
-					value: 'default'
+						value: 'default'
 					});
 				});
 				chrome.browserAction.setIcon({
