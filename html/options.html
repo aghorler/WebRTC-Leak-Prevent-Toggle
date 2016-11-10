@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>WebRTC Leak Prevent Toggle</title>
+	</head>
+	<body>
+		<h3>Advanced options</h3>
 
-<head>
-	<title>WebRTC Leak Prevent Toggle</title>
-</head>
+		<p>Change how the toggle button prevents WebRTC leaks.</p>
+		
+		<div id="content">
+			<div id="new">
+				<p>
+					<strong>WebRTC IP handling policy</strong>
+				</p>
+				<p>
+					IP handling policy:
+					<select id="policy">
+						<option value="default_public_interface_only">Use the default public interface only</option>
+						<option value="default_public_and_private_interfaces">Use the default public interface and private interface</option>
+						<option value="disable_non_proxied_udp">Disable non-proxied UDP (force proxy)</option>
+					</select>
+				</p>
+			</div>
 
-<body>
-	<h3>Advanced options</h3>
-	
-	<p>Change how the toggle button prevents WebRTC leaks.</p>
-	
-	<div id="content">
-		<div id="new">
+			<div id="legacy">
+				<p>
+					<strong>Legacy options</strong>
+				</p>
+				<p>
+					<label>
+						<input type="checkbox" id="multipleroutes"> Prevent WebRTC from using routes other than the default route. <br>
+						<i>(Supported from Chrome version 42, and depreciated from version 48)</i>
+					</label>
+				</p>
+				<p id="legacyProxy">
+					<label>
+						<input type="checkbox" id="proxy"> Prevent WebRTC from using non-proxied UDP.<br>
+						<i>(Supported from Chrome version 47, and depreciated from version 48)</i>
+					</label>
+				</p>
+			</div>
+
 			<p>
-				<strong>WebRTC IP handling policy</strong>
-			</p>
-			<p>
-				IP handling policy:
-				<select id="policy">
-					<option value="default_public_interface_only">Use the default public interface only</option>
-					<option value="default_public_and_private_interfaces">Use the default public interface and private interface</option>
-					<option value="disable_non_proxied_udp">Disable non-proxied UDP (force proxy)</option>
-				</select>
-			</p>
-		</div>
-		
-		<div id="legacyRoutes">
-		<p>
-			<strong>Legacy options</strong>
-		</p>
-		<p>
-			<label>
-				<input type="checkbox" id="multipleroutes"> Prevent WebRTC from using routes other than the default route. <br>
-				<i>(Supported from Chrome version 42, and depreciated from version 48)</i>
-			</label>
-		</p>
-		</div>
-		
-		<div id="legacyProxy">
-			<p>
-				<label>
-					<input type="checkbox" id="proxy"> Prevent WebRTC from using non-proxied UDP.<br>
-					<i>(Supported from Chrome version 47, and depreciated from version 48)</i>
-				</label>
+				<a href="https://github.com/rentamob/WebRTC-Leak-Prevent/blob/master/DOCUMENTATION.md#what-do-the-settings-mean-and-do"><i>What do these options mean?</i></a>
 			</p>
 		</div>
 		
-		<p>
-			<a href="https://github.com/rentamob/WebRTC-Leak-Prevent/blob/master/DOCUMENTATION.md#what-do-the-settings-mean-and-do"><i>What do these options mean?</i></a>
+		<div id="fail">
+			<p align="center" style="color:red">This version of Chrome is incompatible with the required WebRTC privacy options.</p>
+		</div>
+		
+		<div id="incognito">
+			<strong>Incognito protection</strong>
+		
+			<p id="incognitoAllowed" style="color:green;">Enabled</p>
+		
+			<p id="incognitoDisallowed" style="color:red;">
+				Not enabled. <a style="color:red;" href="https://github.com/rentamob/WebRTC-Leak-Prevent/blob/master/DOCUMENTATION.md#what-is-incognito-protection"><i>Learn more.</i></a>
+			</p>
+		</div>
+		
+		<span id="applyButton">
+			<button id="save">Apply settings</button>
+		</span>
+
+		<span id="status"></span>
+
+		<script src="/js/options.js"></script>
+
+		<p align="center" style="color:grey">
+			Developed by rentamob | <a href="https://www.reddit.com/user/rentamob/">/u/rentamob</a> on reddit | <a href="https://github.com/rentamob/WebRTC-Leak-Prevent-Toggle">GitHub source</a>
 		</p>
-	</div>
-	
-	<div id="fail">
-		<p align="center" style="color:red">This version of Chrome is incompatible with the required WebRTC privacy options.</p>
-	</div>
-	
-	<div id="incognito">
-		<strong>Incognito protection</strong>
-	
-		<p id="incognitoAllowed" style="color:green;">Enabled</p>
-	
-		<p id="incognitoDisallowed" style="color:red;">Not enabled. <a style="color:red;" href="https://github.com/rentamob/WebRTC-Leak-Prevent/blob/master/DOCUMENTATION.md#what-is-incognito-protection"><i>Learn more.</i></a>
-	</div>
-	
-	<div id="status"></div>
-	<div id="applyButton">
-		<button id="save">Apply settings</button>
-	</div>
-	<script src="/js/options.js"></script>
-	<p align="center" style="color:grey">Developed by rentamob | <a href="https://www.reddit.com/user/rentamob/">/u/rentamob</a> on reddit | <a href="https://github.com/rentamob/WebRTC-Leak-Prevent-Toggle">GitHub source</a></p>
-</body>
+	</body>
 </html>

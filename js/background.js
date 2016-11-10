@@ -4,7 +4,7 @@ function getMajorVerison(){
 }
 
 chrome.storage.local.get(null, function(items){
-	if (items.toggleStatus == undefined){
+	if(items.toggleStatus == undefined){
 		chrome.storage.local.set({
 			toggleStatus: true
 		});
@@ -13,26 +13,36 @@ chrome.storage.local.get(null, function(items){
 		});
 	}
 	if(getMajorVerison() > 47){
-		if (items.rtcIPHandling == undefined){
-			chrome.storage.local.set({
-				rtcIPHandling: 'default_public_interface_only'
-			}, function(){
-				chrome.privacy.network.webRTCIPHandlingPolicy.set({
-					value: 'default_public_interface_only'
-				});
-			})
+		if(items.rtcIPHandling == undefined){
+			try{
+				chrome.storage.local.set({
+					rtcIPHandling: 'default_public_interface_only'
+				}, function(){
+					chrome.privacy.network.webRTCIPHandlingPolicy.set({
+						value: 'default_public_interface_only'
+					});
+				})
+			}
+			catch(e){
+				console.log("Error: " + e.message);
+			}
 		}
 	}
 	else if(getMajorVerison() > 41 && getMajorVerison() < 48){
-		if (items.rtcMultipleRoutes == undefined){
-			chrome.storage.local.set({
-				rtcMultipleRoutes: true
-			}, function(){
-				chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
-					value: false,
-					scope: 'regular'
-				});
-			})
+		if(items.rtcMultipleRoutes == undefined){
+			try{
+				chrome.storage.local.set({
+					rtcMultipleRoutes: true
+				}, function(){
+					chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
+						value: false,
+						scope: 'regular'
+					});
+				})
+			}
+			catch(e){
+				console.log("Error: " + e.message);
+			}
 		}
 	}
 });
@@ -41,39 +51,41 @@ chrome.browserAction.onClicked.addListener(function(activeTab){
 	try{
 		chrome.storage.local.get('toggleStatus', function(setWebRTC){
 			var passCheck = false;
-			if (setWebRTC.toggleStatus){
+			if(setWebRTC.toggleStatus){
 				if(getMajorVerison() > 47){
-					chrome.storage.local.get('rtcIPHandling', function(items){
-						chrome.privacy.network.webRTCIPHandlingPolicy.set({
-							value: 'default'
-						});
+					chrome.privacy.network.webRTCIPHandlingPolicy.set({
+						value: 'default'
 					});
 					passCheck = true;
 				}
-				else if(getMajorVerison() > 41 && getMajorVerison() < 48){
-					chrome.storage.local.get('rtcMultipleRoutes', function(items) {
-						chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
-							value: true,
-							scope: 'regular'
-						});
+				else if(getMajorVerison() > 41 && getMajorVerison() < 47){
+					chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
+						value: true,
+						scope: 'regular'
 					});
-					if(getMajorVerison() == 47){
-						chrome.storage.local.get('nonProxiedUDP', function(items){
-							chrome.privacy.network.webRTCNonProxiedUdpEnabled.set({
-								value: true,
-								scope: 'regular'
-							});
-						});
-					}
+					passCheck = true;
+				}
+				else if(getMajorVerison() == 47){
+					chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
+						value: true,
+						scope: 'regular'
+					});
+					chrome.privacy.network.webRTCNonProxiedUdpEnabled.set({
+						value: true,
+						scope: 'regular'
+					});
 					passCheck = true;
 				}
 				if(passCheck){
 					chrome.browserAction.setIcon({
-					path: '/img/icon32_off.png'
+						path: '/img/icon32_off.png'
 					});
 					chrome.storage.local.set({
 						toggleStatus: false
 					});
+				}
+				else{
+					throw "Unsupported browser version.";
 				}
 			} 
 			else{
@@ -85,21 +97,26 @@ chrome.browserAction.onClicked.addListener(function(activeTab){
 					});
 					passCheck = true;
 				}
-				else if(getMajorVerison() > 41 && getMajorVerison() < 48){
+				else if(getMajorVerison() > 41 && getMajorVerison() < 47){
 					chrome.storage.local.get('rtcMultipleRoutes', function(items){
 						chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
 							value: !items.rtcMultipleRoutes,
 							scope: 'regular'
 						});
 					});
-					if(getMajorVerison() == 47){
-						chrome.storage.local.get('nonProxiedUDP', function(items){
-							chrome.privacy.network.webRTCNonProxiedUdpEnabled.set({
-								value: !items.nonProxiedUDP,
-								scope: 'regular'
-							});
+					passCheck = true;
+				}
+				else if(getMajorVerison() == 47){
+					chrome.storage.local.get('null', function(items){
+						chrome.privacy.network.webRTCMultipleRoutesEnabled.set({
+							value: !items.rtcMultipleRoutes,
+							scope: 'regular'
 						});
-					}
+						chrome.privacy.network.webRTCNonProxiedUdpEnabled.set({
+							value: !items.nonProxiedUDP,
+							scope: 'regular'
+						});
+					});
 					passCheck = true;
 				}
 				if(passCheck){
@@ -110,10 +127,14 @@ chrome.browserAction.onClicked.addListener(function(activeTab){
 						toggleStatus: true
 					});
 				}
+				else{
+					throw "Unsupported browser version.";
+				}
+
 			}
 		});
 	} 
 	catch (e){
-		console.log("Error: " + e + ". Browser version: " + getMajorVerison());
+		alert("Error: " + e);
 	}
 });
