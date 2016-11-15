@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "WebRTC Leak Prevent Toggle",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "Toggle WebRTC leak prevention.",
 	"icons": {
 		"128": "/img/icon128.png"
