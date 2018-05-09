@@ -1,5 +1,5 @@
 ## WebRTC Leak Prevent Toggle
-**Version 1.0.13 | May 9 2018**
+**Version 1.0.14 | May 9 2018**
 
 Allows for the WebRTC privacy options in Chromium to be toggled between values that **prevent** and **do not prevent** [WebRTC leaks](https://diafygi.github.io/webrtc-ips/).
 
